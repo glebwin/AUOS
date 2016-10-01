@@ -1,5 +1,6 @@
 #include "interrupt.h"
 #include "ints.h"
+#include "pit.h"
 #include "serialout.h"
 
 static void qemu_gdb_hang(void)
@@ -22,7 +23,8 @@ void main(void)
     enable_ints();
 
     putstring("System starts\n");
-    __asm__ volatile("int $37");
+
+    init_pit();
 
     while (1);
 }
