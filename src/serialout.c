@@ -29,3 +29,19 @@ void putstring(const char *s)
         s++;
     }
 }
+
+void putdec(uint64_t d)
+{
+    if (!d)
+    {
+        putchar('0');
+        return;
+    }
+
+    static char stack[20];
+    static int8_t top = 0;
+    for (; d; d /= 10)
+        stack[top++] = d % 10;
+    for (top--; top >= 0; top--)
+        putchar('0' + stack[top]);
+}
